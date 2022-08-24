@@ -8,12 +8,8 @@ import static com.codeborne.selenide.Selenide.$;
 public class RegistrationPage {
 
     // поле "Имя"
-    private final SelenideElement nameField = $(byText("Имя"));
-
-    // метод клика по полю "Имя"
-    public void clickNameField() {
-        nameField.click();
-    }
+    private final SelenideElement nameField =
+            $(byXpath("//*[@id=\"root\"]/div/main/div/form/fieldset[1]/div/div/input"));
 
     // метод заполнения поля "Имя"
     public void setNameField(String name) {
@@ -21,12 +17,8 @@ public class RegistrationPage {
     }
 
     // поле "Email"
-    private final SelenideElement emailField = $(byText("Email"));
-
-    // метод клика по полю "Email"
-    public void clickEmailField() {
-        emailField.click();
-    }
+    private final SelenideElement emailField =
+            $(byXpath("/html/body/div/div/main/div/form/fieldset[2]/div/div/input"));
 
     // метод заполнения поля "Имя"
     public void setEmailField(String email) {
@@ -34,12 +26,8 @@ public class RegistrationPage {
     }
 
     // поле "Пароль"
-    private final SelenideElement passwordField = $(byText("Пароль"));
-
-    // метод клика по полю "Пароль"
-    public void clickPasswordField() {
-        passwordField.click();
-    }
+    private final SelenideElement passwordField =
+            $(byXpath("//*[@id=\"root\"]/div/main/div/form/fieldset[3]/div/div/input"));
 
     // метод заполнения поля "Пароль"
     public void setPasswordField(String password) {
@@ -54,6 +42,12 @@ public class RegistrationPage {
     // метод клика по полю "Зарегистрироваться"
     public void clickRegistrationButton() {
         registrationButton.click();
+    }
+
+    private final SelenideElement unsuccessfulRegistration = $(byText("Некорректный пароль"));
+
+    public SelenideElement getUnsuccessfulRegistration() {
+        return unsuccessfulRegistration;
     }
 
     // метод заполнения страницы регистрации нового пользователя

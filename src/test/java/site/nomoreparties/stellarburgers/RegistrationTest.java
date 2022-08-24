@@ -1,5 +1,6 @@
 package site.nomoreparties.stellarburgers;
 
+import com.codeborne.selenide.Condition;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,8 +15,7 @@ public class RegistrationTest {
 
     @Before
     public void preconditions() {
-        openMainPage = open("https://stellarburgers.nomoreparties.site/",
-                MainPage.class);
+        openMainPage = open("https://stellarburgers.nomoreparties.site/", MainPage.class);
         openMainPage.waitForLoadHomePage();
         newRegistration = new RegistrationPage();
         loginPage = new LoginPage();
@@ -25,10 +25,24 @@ public class RegistrationTest {
     @Test
     public void newPositiveRegistration() {
         openMainPage.clickPrivetOfficeButton();
+        loginPage.waitForLoadLoginHomePage();
         loginPage.clickRegistrationButtonOnLoginPage();
         newRegistration.RegisterOrderPageFiller(RandomStringUtils.randomAlphabetic(6),
                 RandomStringUtils.randomAlphabetic(6) + "@yandex.ru",
                 RandomStringUtils.randomAlphabetic(6));
         newRegistration.clickRegistrationButton();
+    }
+
+    // Тест на не успешную регистрацию нового пользователя, пароль меньше 6 символов
+    @Test
+    public void newNegativeRegistration() {
+        openMainPage.clickPrivetOfficeButton();
+        loginPage.waitForLoadLoginHomePage();
+        loginPage.clickRegistrationButtonOnLoginPage();
+        newRegistration.RegisterOrderPageFiller(RandomStringUtils.randomAlphabetic(6),
+                RandomStringUtils.randomAlphabetic(6) + "@yandex.ru",
+                RandomStringUtils.randomAlphabetic(5));
+        newRegistration.clickRegistrationButton();
+        newRegistration.getUnsuccessfulRegistration().shouldHave(Condition.exactText("Некорректный пароль"));
     }
 }

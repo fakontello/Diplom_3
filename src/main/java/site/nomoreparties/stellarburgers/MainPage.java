@@ -3,15 +3,15 @@ package site.nomoreparties.stellarburgers;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static java.time.Duration.ofSeconds;
 
 public class MainPage {
 
     // кнопка "Личный кабинет"
-    private final SelenideElement privetOfficeButton = $(byClassName("AppHeader_header__linkText__3q_va ml-2"));
+    private final SelenideElement privetOfficeButton =
+            $(byXpath("//*[@id=\"root\"]/div/header/nav/a/p"));
 
     // метод клика по кнопке "Личный кабинет"
     public void clickPrivetOfficeButton() {
@@ -20,6 +20,6 @@ public class MainPage {
 
     // метод ожидания загрузки страницы: проверили видимость кнопки "Личный кабинет"
     public void waitForLoadHomePage() {
-        $(byText("Личный кабинет")).shouldBe(visible,ofSeconds(8));
+        $(byText("Соберите бургер")).shouldBe(visible,ofSeconds(3));
     }
 }
