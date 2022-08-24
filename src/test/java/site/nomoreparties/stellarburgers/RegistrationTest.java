@@ -31,6 +31,7 @@ public class RegistrationTest {
                 RandomStringUtils.randomAlphabetic(6) + "@yandex.ru",
                 RandomStringUtils.randomAlphabetic(6));
         newRegistration.clickRegistrationButton();
+        loginPage.waitForLoadLoginHomePage();
     }
 
     // Тест на не успешную регистрацию нового пользователя, пароль меньше 6 символов
