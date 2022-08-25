@@ -1,6 +1,9 @@
 package site.nomoreparties.stellarburgers;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -20,7 +23,7 @@ public class RegistrationPage {
     private final SelenideElement emailField =
             $(byXpath("/html/body/div/div/main/div/form/fieldset[2]/div/div/input"));
 
-    // метод заполнения поля "Имя"
+    // метод заполнения поля "Email"
     public void setEmailField(String email) {
         emailField.setValue(email);
     }
@@ -39,9 +42,14 @@ public class RegistrationPage {
             $(byCssSelector("button[class='button_button__33qZ0 "
                     + "button_button_type_primary__1O7Bx button_button_size_medium__3zxIa']"));
 
-    // метод клика по полю "Зарегистрироваться"
+    // метод клика по кнопке "Зарегистрироваться"
     public void clickRegistrationButton() {
         registrationButton.click();
+    }
+
+    // метод ожидания кнопки "Зарегистрироваться"
+    public void waitForRegistrationButton() {
+        registrationButton.shouldBe(Condition.visible, Duration.ofSeconds(3));
     }
 
     private final SelenideElement unsuccessfulRegistration = $(byText("Некорректный пароль"));
@@ -55,5 +63,18 @@ public class RegistrationPage {
         setNameField(name);
         setEmailField(email);
         setPasswordField(password);
+    }
+
+    // кнопка "Войти" на странице регистрации
+    private final SelenideElement registrationLoginButton = $(byXpath("//*[@id=\"root\"]/div/main/div/div/p/a"));
+
+    // метод клика по кнопке "Войти" на странице регистрации
+    public void clickRegistrationLoginButton() {
+        registrationLoginButton.click();
+    }
+
+    // етод ожидания кнопки Войти на странице регистрации
+    public void waitRegistrationLoginButton() {
+        registrationButton.shouldBe(Condition.visible, Duration.ofSeconds(3));
     }
 }

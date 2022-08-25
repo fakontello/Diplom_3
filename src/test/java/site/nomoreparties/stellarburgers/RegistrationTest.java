@@ -25,20 +25,20 @@ public class RegistrationTest {
     @Test
     public void newPositiveRegistration() {
         openMainPage.clickPrivetOfficeButton();
-        loginPage.waitForLoadLoginHomePage();
+        loginPage.waitForLoadLoginPage();
         loginPage.clickRegistrationButtonOnLoginPage();
         newRegistration.RegisterOrderPageFiller(RandomStringUtils.randomAlphabetic(6),
                 RandomStringUtils.randomAlphabetic(6) + "@yandex.ru",
                 RandomStringUtils.randomAlphabetic(6));
         newRegistration.clickRegistrationButton();
-        loginPage.waitForLoadLoginHomePage();
+        loginPage.waitForLoadLoginPage();
     }
 
     // Тест на не успешную регистрацию нового пользователя, пароль меньше 6 символов
     @Test
     public void newNegativeRegistration() {
         openMainPage.clickPrivetOfficeButton();
-        loginPage.waitForLoadLoginHomePage();
+        loginPage.waitForLoadLoginPage();
         loginPage.clickRegistrationButtonOnLoginPage();
         newRegistration.RegisterOrderPageFiller(RandomStringUtils.randomAlphabetic(6),
                 RandomStringUtils.randomAlphabetic(6) + "@yandex.ru",

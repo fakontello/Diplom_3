@@ -18,9 +18,40 @@ public class LoginPage {
         registrationButtonOnLoginPage.click();
     }
 
-    // метод ожидания загрузки страницы: проверили видимость кнопки "Зарегистрироваться"
-    public void waitForLoadLoginHomePage() {
-        $(byCssSelector("button[class='button_button__33qZ0 button_button_type_primary__1O7Bx " +
-                "button_button_size_medium__3zxIa']")).shouldBe(visible,ofSeconds(3));
+    // метод ожидания загрузки страницы: проверили видимость кнопки "Войти"
+    public void waitForLoadLoginPage() {
+        $(byXpath("/html/body/div/div/main/div/form/button")).shouldBe(visible, ofSeconds(3));
+    }
+
+    // поле "Email"
+    private final SelenideElement loginEmailField =
+            $(byXpath("//*[@id=\"root\"]/div/main/div/form/fieldset[1]/div/div/input"));
+
+    // метод заполнения поля "Email"
+    public void setLoginEmailField(String email) {
+        loginEmailField.setValue(email);
+    }
+
+    // поле "Пароль"
+    private final SelenideElement loginPasswordField =
+            $(byXpath("//*[@id=\"root\"]/div/main/div/form/fieldset[2]/div/div/input"));
+
+    // метод заполнения поля "Пароль"
+    public void setLoginPasswordField(String password) {
+        loginPasswordField.setValue(password);
+    }
+
+    // кнопка "Войти" на странице логина
+    private final SelenideElement loginEnterButton = $(byXpath("//*[@id=\"root\"]/div/main/div/form/button"));
+
+    // метод клика по кнопке "Войти" на странице логина
+    public void clickLoginEnterButton() {
+        loginEnterButton.click();
+    }
+
+    // метод заполнения страницы вход пользователя
+    public void loginPageFiller(String email, String password) {
+        setLoginEmailField(email);
+        setLoginPasswordField(password);
     }
 }
