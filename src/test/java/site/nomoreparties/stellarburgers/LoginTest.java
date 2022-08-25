@@ -1,5 +1,6 @@
 package site.nomoreparties.stellarburgers;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
@@ -20,6 +21,7 @@ public class LoginTest {
 
     @Before
     public void preconditions() {
+        Configuration.browser = System.getProperty("browser"); // для запуска в разных браузерах
         openMainPage = open("https://stellarburgers.nomoreparties.site/", MainPage.class);
         openMainPage.waitForLoadHomePage();
         newRegistration = new RegistrationPage();
