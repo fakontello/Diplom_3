@@ -1,6 +1,8 @@
 package site.nomoreparties.stellarburgers;
 
+import com.codeborne.selenide.Selenide;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -39,6 +41,11 @@ public class PrivateOfficeTest {
         loginPage.waitForLoadLoginPage();
         loginPage.clickLoginEnterButton();
         openMainPage.waitForLoadMainPageAfterLogin();
+    }
+
+    @After
+    public void postConditions() {
+        Selenide.closeWebDriver();
     }
 
     // переход в личный кабинет

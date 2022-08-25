@@ -1,7 +1,9 @@
 package site.nomoreparties.stellarburgers;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,6 +22,11 @@ public class RegistrationTest {
         loginPage = new LoginPage();
         openMainPage.clickPrivetOfficeButton();
         loginPage.waitForLoadLoginPage();
+    }
+
+    @After
+    public void postConditions() {
+        Selenide.closeWebDriver();
     }
 
     // Тест на успешную регистрацию нового пользователя

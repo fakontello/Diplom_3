@@ -1,5 +1,6 @@
 package site.nomoreparties.stellarburgers;
 
+import com.codeborne.selenide.Selenide;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -43,6 +44,7 @@ public class LoginTest {
         loginPage.waitForLoadLoginPage();
         loginPage.clickLoginEnterButton();
         openMainPage.waitForLoadMainPageAfterLogin();
+        Selenide.closeWebDriver();
     }
 
     // тест входа по кнопке «Войти в аккаунт» на главной странице
