@@ -38,7 +38,6 @@ public class PrivateOfficeTest {
         loginPage.loginPageFiller(email, password);
         loginPage.waitForLoadLoginPage();
         loginPage.clickLoginEnterButton();
-        loginPage.clickLoginEnterButton(); // я абсолютно без понятия кака избавиться здесь от второго клика
         openMainPage.waitForLoadMainPageAfterLogin();
     }
 

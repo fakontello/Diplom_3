@@ -18,7 +18,6 @@ public class ConstructorTabsTest {
         openMainPage.waitForLoadHomePage();
         RegistrationPage newRegistration = new RegistrationPage();
         LoginPage loginPage = new LoginPage();
-        PrivateOfficePage privateOfficePage = new PrivateOfficePage();
 
         // регистрация нового пользователя
         openMainPage.clickPrivetOfficeButton();
@@ -35,7 +34,6 @@ public class ConstructorTabsTest {
         loginPage.loginPageFiller(email, password);
         loginPage.waitForLoadLoginPage();
         loginPage.clickLoginEnterButton();
-        loginPage.clickLoginEnterButton(); // я абсолютно без понятия кака избавиться здесь от второго клика
         openMainPage.waitForLoadMainPageAfterLogin();
     }
 

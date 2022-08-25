@@ -9,11 +9,6 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class LoginPage {
 
-    // метод ожидания загрузки страницы
-    public void waitForLoadLoginPage() {
-        $(byText("Вы — новый пользователь?")).shouldBe(Condition.visible, Duration.ofSeconds(3));
-    }
-
     // кнопка "Зарегистрироваться" на странице логина
     private final SelenideElement registrationButtonOnLoginPage =
             $(byXpath("//*[@id=\"root\"]/div/main/div/div/p[1]/a"));
@@ -49,6 +44,11 @@ public class LoginPage {
 
     // кнопка "Войти" на странице логина
     private final SelenideElement loginEnterButton = $(byXpath("//*[@id=\"root\"]/div/main/div/form/button"));
+
+    // метод ожидания загрузки страницы
+    public void waitForLoadLoginPage() {
+        loginEnterButton.shouldBe(Condition.visible);
+    }
 
     // метод клика по кнопке "Войти" на странице логина
     public void clickLoginEnterButton() {
