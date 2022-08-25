@@ -1,6 +1,7 @@
 package site.nomoreparties.stellarburgers;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,6 +36,16 @@ public class LoginTest {
         loginPage.waitForLoadLoginPage();
     }
 
+    @After
+    public void postConditions() {
+        loginPage.waitForLoadLoginPage();
+        loginPage.loginPageFiller(email,
+                password);
+        loginPage.waitForLoadLoginPage();
+        loginPage.clickLoginEnterButton();
+        openMainPage.waitForLoadMainPageAfterLogin();
+    }
+
     // тест входа по кнопке «Войти в аккаунт» на главной странице
     @Test
     public void loginFromMainPage() {
@@ -42,14 +53,6 @@ public class LoginTest {
         openMainPage.clickHomePageButton();
         openMainPage.waitForLoadHomePage();
         openMainPage.clickLoginAccountButton();
-        loginPage.waitForLoadLoginPage();
-        loginPage.loginPageFiller(email,
-                password);
-        loginPage.waitForLoadLoginPage();
-        loginPage.clickLoginEnterButton();
-        loginPage.clickLoginEnterButton();
-        loginPage.clickLoginEnterButton();
-        openMainPage.waitForLoadMainPageAfterLogin();
     }
 
     // тест входа по кнопке "Личный кабинет"
@@ -59,14 +62,6 @@ public class LoginTest {
         openMainPage.clickHomePageButton();
         openMainPage.waitForLoadHomePage();
         openMainPage.clickPrivetOfficeButton();
-        loginPage.waitForLoadLoginPage();
-        loginPage.loginPageFiller(email,
-                password);
-        loginPage.waitForLoadLoginPage();
-        loginPage.clickLoginEnterButton();
-        loginPage.clickLoginEnterButton();
-        loginPage.clickLoginEnterButton();
-        openMainPage.waitForLoadMainPageAfterLogin();
     }
 
     // тест входа в личный кабинет через кнопку Войти в форме регистрации
@@ -76,12 +71,6 @@ public class LoginTest {
         loginPage.clickRegistrationButtonOnLoginPage();
         newRegistration.waitRegistrationLoginButton();
         newRegistration.clickRegistrationLoginButton();
-        loginPage.waitForLoadLoginPage();
-        loginPage.loginPageFiller(email,
-                password);
-        loginPage.waitForLoadLoginPage();
-        loginPage.clickLoginEnterButton();
-        openMainPage.waitForLoadMainPageAfterLogin();
     }
 
     // вход через кнопку в форме восстановления пароля
@@ -90,11 +79,6 @@ public class LoginTest {
         loginPage.clickResetPasswordButton();
         resetPasswordPage.waitResetPasswordPage();
         resetPasswordPage.clickResetPassLoginButton();
-        loginPage.waitForLoadLoginPage();
-        loginPage.loginPageFiller(email,
-                password);
-        loginPage.waitForLoadLoginPage();
-        loginPage.clickLoginEnterButton();
-        openMainPage.waitForLoadMainPageAfterLogin();
+
     }
 }
