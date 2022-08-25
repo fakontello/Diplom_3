@@ -13,8 +13,7 @@ import static java.time.Duration.ofSeconds;
 public class MainPage {
 
     // кнопка "Личный кабинет"
-    private final SelenideElement privetOfficeButton =
-            $(byXpath("//*[@id=\"root\"]/div/header/nav/a/p"));
+    private final SelenideElement privetOfficeButton = $(byXpath("//*[@id=\"root\"]/div/header/nav/a/p"));
 
     // метод клика по кнопке "Личный кабинет"
     public void clickPrivetOfficeButton() {
@@ -37,14 +36,9 @@ public class MainPage {
     // кнопка "Оформить заказ" после входа в личный кабинет
     private final SelenideElement makeOrderButton = $(byXpath("//*[@id=\"root\"]/div/main/section[2]/div/button"));
 
-    // метод клика по кнопке "Оформить заказ"
-    public void clickMakeOrderButton() {
-        makeOrderButton.click();
-    }
-
     // метод ожидания страницы после входа в личный кабинет
     public void waitForLoadMainPageAfterLogin() {
-        $(byXpath("/html/body/div/div/main/section[2]/div/button")).shouldBe(Condition.visible, Duration.ofSeconds(3));
+        makeOrderButton.shouldBe(Condition.visible, Duration.ofSeconds(3));
     }
 
     // кнопка галвное страницы
