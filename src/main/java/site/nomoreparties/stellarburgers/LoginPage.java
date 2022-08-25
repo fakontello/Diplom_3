@@ -1,11 +1,11 @@
 package site.nomoreparties.stellarburgers;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
-import static java.time.Duration.ofSeconds;
 
 public class LoginPage {
 
@@ -20,7 +20,7 @@ public class LoginPage {
 
     // метод ожидания загрузки страницы: проверили видимость кнопки "Войти"
     public void waitForLoadLoginPage() {
-        $(byXpath("/html/body/div/div/main/div/form/button")).shouldBe(visible, ofSeconds(3));
+        $(byText("Вы — новый пользователь?")).shouldBe(Condition.visible, Duration.ofSeconds(3));
     }
 
     // поле "Email"
@@ -49,12 +49,6 @@ public class LoginPage {
         loginEnterButton.click();
     }
 
-    // метод заполнения страницы вход пользователя
-    public void loginPageFiller(String email, String password) {
-        setLoginEmailField(email);
-        setLoginPasswordField(password);
-    }
-
     // кнопка Восстановить пароль на странице логина
     private final SelenideElement resetPasswordButton = $(byXpath("//*[@id=\"root\"]/div/main/div/div/p[2]/a"));
 
@@ -62,4 +56,11 @@ public class LoginPage {
     public void clickResetPasswordButton() {
         resetPasswordButton.click();
     }
+
+    // метод заполнения страницы вход пользователя
+    public void loginPageFiller(String email, String password) {
+        setLoginEmailField(email);
+        setLoginPasswordField(password);
+    }
+
 }

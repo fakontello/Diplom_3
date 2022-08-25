@@ -22,7 +22,7 @@ public class MainPage {
 
     // метод ожидания загрузки страницы: проверили видимость кнопки "Личный кабинет"
     public void waitForLoadHomePage() {
-        $(byText("Соберите бургер")).shouldBe(visible, ofSeconds(3));
+        $(byText("Соберите бургер")).shouldBe(Condition.visible, Duration.ofSeconds(3));
     }
 
     // кнопка "Войти в аккаунт"

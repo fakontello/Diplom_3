@@ -39,8 +39,7 @@ public class LoginTest {
     @After
     public void postConditions() {
         loginPage.waitForLoadLoginPage();
-        loginPage.loginPageFiller(email,
-                password);
+        loginPage.loginPageFiller(email, password);
         loginPage.waitForLoadLoginPage();
         loginPage.clickLoginEnterButton();
         openMainPage.waitForLoadMainPageAfterLogin();
@@ -49,7 +48,6 @@ public class LoginTest {
     // тест входа по кнопке «Войти в аккаунт» на главной странице
     @Test
     public void loginFromMainPage() {
-        // вход в личный кабинет нового пользователя
         openMainPage.clickHomePageButton();
         openMainPage.waitForLoadHomePage();
         openMainPage.clickLoginAccountButton();
@@ -58,7 +56,6 @@ public class LoginTest {
     // тест входа по кнопке "Личный кабинет"
     @Test
     public void loginFromPrivetOfficeButton() {
-        // вход в личный кабинет нового пользователя
         openMainPage.clickHomePageButton();
         openMainPage.waitForLoadHomePage();
         openMainPage.clickPrivetOfficeButton();
@@ -67,18 +64,16 @@ public class LoginTest {
     // тест входа в личный кабинет через кнопку Войти в форме регистрации
     @Test
     public void loginFromRegistrationLoginButton() {
-        // вход в личный кабинет нового пользователя
         loginPage.clickRegistrationButtonOnLoginPage();
         newRegistration.waitRegistrationLoginButton();
         newRegistration.clickRegistrationLoginButton();
     }
 
-    // вход через кнопку в форме восстановления пароля
+    // вход через кнопку Войти в форме восстановления пароля
     @Test
     public void loginFromResetPasswordLoginButton() {
         loginPage.clickResetPasswordButton();
         resetPasswordPage.waitResetPasswordPage();
         resetPasswordPage.clickResetPassLoginButton();
-
     }
 }
