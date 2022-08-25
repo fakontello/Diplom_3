@@ -48,10 +48,10 @@ public class MainPage {
     }
 
     // кнопка галвное страницы
-    private final SelenideElement mainPageButton = $(byXpath("//*[@id=\"root\"]/div/header/nav/div/a"));
+    private final SelenideElement homePageButton = $(byXpath("//*[@id=\"root\"]/div/header/nav/div/a"));
 
     // метод клика по кнопке главное страницы
-    public void clickMainPageButton() {
-        mainPageButton.click();
+    public void clickHomePageButton() {
+        homePageButton.click();
     }
 }

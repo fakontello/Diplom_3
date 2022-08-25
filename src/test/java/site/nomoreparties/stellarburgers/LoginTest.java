@@ -39,7 +39,7 @@ public class LoginTest {
         newRegistration.clickRegistrationButton();
         loginPage.waitForLoadLoginPage();
         // вход в личный кабинет нового пользователя
-        openMainPage.clickMainPageButton();
+        openMainPage.clickHomePageButton();
         openMainPage.waitForLoadHomePage();
         openMainPage.clickLoginAccountButton();
         loginPage.waitForLoadLoginPage();
@@ -47,13 +47,13 @@ public class LoginTest {
                 password);
         loginPage.waitForLoadLoginPage();
         loginPage.clickLoginEnterButton();
-        loginPage.clickLoginEnterButton();
         openMainPage.waitForLoadMainPageAfterLogin();
     }
 
     // тест входа по кнопке "Личный кабинет"
     @Test
     public void loginFromPrivetOfficeButton() {
+        // регистрация нового пользователя
         openMainPage.clickPrivetOfficeButton();
         loginPage.waitForLoadLoginPage();
         loginPage.clickRegistrationButtonOnLoginPage();
@@ -64,7 +64,7 @@ public class LoginTest {
         newRegistration.clickRegistrationButton();
         loginPage.waitForLoadLoginPage();
         // вход в личный кабинет нового пользователя
-        openMainPage.clickMainPageButton();
+        openMainPage.clickHomePageButton();
         openMainPage.waitForLoadHomePage();
         // переход на страницу логина по кнопке "Личный кабинет"
         openMainPage.clickPrivetOfficeButton();
@@ -73,16 +73,17 @@ public class LoginTest {
                 password);
         loginPage.waitForLoadLoginPage();
         loginPage.clickLoginEnterButton();
-        loginPage.clickLoginEnterButton();
         openMainPage.waitForLoadMainPageAfterLogin();
     }
 
-    // тест входа в личный кабинет через кнопку в форме регистрации
+    // тест входа в личный кабинет через кнопку Войти в форме регистрации
     @Test
     public void loginFromRegistrationLoginButton() {
+        // регистрация нового пользователя
         openMainPage.clickPrivetOfficeButton();
         loginPage.waitForLoadLoginPage();
         loginPage.clickRegistrationButtonOnLoginPage();
+        newRegistration.waitForRegistrationButton();
         newRegistration.RegisterOrderPageFiller(RandomStringUtils.randomAlphabetic(6),
                 email,
                 password);
@@ -93,10 +94,10 @@ public class LoginTest {
         loginPage.clickRegistrationButtonOnLoginPage();
         newRegistration.waitRegistrationLoginButton();
         newRegistration.clickRegistrationLoginButton();
+        loginPage.waitForLoadLoginPage();
         loginPage.loginPageFiller(email,
                 password);
         loginPage.waitForLoadLoginPage();
-        loginPage.clickLoginEnterButton();
         loginPage.clickLoginEnterButton();
         openMainPage.waitForLoadMainPageAfterLogin();
     }
