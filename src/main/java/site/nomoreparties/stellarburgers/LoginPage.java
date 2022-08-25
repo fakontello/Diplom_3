@@ -54,4 +54,12 @@ public class LoginPage {
         setLoginEmailField(email);
         setLoginPasswordField(password);
     }
+
+    // кнопка Восстановить пароль на странице логина
+    private final SelenideElement resetPasswordButton = $(byXpath("//*[@id=\"root\"]/div/main/div/div/p[2]/a"));
+
+    // метод клика по кнопке Восстановить пароль
+    public void clickResetPasswordButton() {
+        resetPasswordButton.click();
+    }
 }
