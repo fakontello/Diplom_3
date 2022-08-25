@@ -6,11 +6,8 @@ import org.junit.Test;
 
 import static com.codeborne.selenide.Selenide.open;
 
-public class PrivateOfficeTest {
-
+public class ConstructorTabsTest {
     private MainPage openMainPage;
-    private PrivateOfficePage privateOfficePage;
-    private LoginPage loginPage;
     String password = RandomStringUtils.randomAlphabetic(6);
     String email = RandomStringUtils.randomAlphabetic(6) + "@yandex.ru";
 
@@ -20,8 +17,8 @@ public class PrivateOfficeTest {
         openMainPage = open("https://stellarburgers.nomoreparties.site/", MainPage.class);
         openMainPage.waitForLoadHomePage();
         RegistrationPage newRegistration = new RegistrationPage();
-        loginPage = new LoginPage();
-        privateOfficePage = new PrivateOfficePage();
+        LoginPage loginPage = new LoginPage();
+        PrivateOfficePage privateOfficePage = new PrivateOfficePage();
 
         // регистрация нового пользователя
         openMainPage.clickPrivetOfficeButton();
@@ -42,29 +39,26 @@ public class PrivateOfficeTest {
         openMainPage.waitForLoadMainPageAfterLogin();
     }
 
-    // переход в личный кабинет
+    // переход по разделам Конструктора: Соусы
     @Test
-    public void enterPersonalOffice() {
-        openMainPage.clickPrivetOfficeButton();
-        privateOfficePage.waitPrivateOfficePageLoad();
+    public void openSauceTab() {
+        openMainPage.clickSauceButton();
+        openMainPage.waitSaucePageOpen();
     }
 
-    // переход из личного кабинета в конструктор
+    // переход по разделам Конструктора: Начинки
     @Test
-    public void enterConstructor() {
-        openMainPage.clickPrivetOfficeButton();
-        privateOfficePage.waitPrivateOfficePageLoad();
-        privateOfficePage.clickConstructorButton();
-        openMainPage.waitForLoadMainPageAfterLogin();
+    public void openFillersTab() {
+        openMainPage.clickFillersButton();
+        openMainPage.waitFillersPageOpen();
     }
 
-    // выход из личного кабинета
+    // переход по разделам Конструктора: Булки
     @Test
-    public void exitPrivateOffice() {
-        openMainPage.clickPrivetOfficeButton();
-        privateOfficePage.waitPrivateOfficePageLoad();
-        privateOfficePage.clickExitButton();
-        loginPage.waitForLoadLoginPage();
+    public void openBunsTab() {
+        openMainPage.clickSauceButton();
+        openMainPage.waitSaucePageOpen();
+        openMainPage.clickBunsButton();
+        openMainPage.waitBunsPageOpen();
     }
-
 }

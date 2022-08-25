@@ -48,4 +48,43 @@ public class MainPage {
     public void clickHomePageButton() {
         homePageButton.click();
     }
+
+    // кнопка Консутрктора: Соусы
+    private final SelenideElement sauceButton = $(byXpath("//*[@id=\"root\"]/div/main/section[1]/div[1]/div[2]/span"));
+
+    // метод клика по кнопке Соусы
+    public void clickSauceButton() {
+        sauceButton.click();
+    }
+
+    // метод ожидания открытия раздела Соусы
+    public void waitSaucePageOpen() {
+        $(byText("Соусы")).shouldBe(Condition.visible, Duration.ofSeconds(3));
+    }
+
+    // кнопка Конструктора: Начинки
+    private final SelenideElement fillersButton = $(byXpath("//*[@id=\"root\"]/div/main/section[1]/div[1]/div[3]/span"));
+
+    // метод клика по кнопке Начинки
+    public void clickFillersButton() {
+        fillersButton.click();
+    }
+
+    // метод ожидания открытия раздела Начинки
+    public void waitFillersPageOpen() {
+        $(byText("Начинки")).shouldBe(Condition.visible, Duration.ofSeconds(3));
+    }
+
+    // кнопка Конструктора: Булки
+    private final SelenideElement bunsButton = $(byXpath("//*[@id=\"root\"]/div/main/section[1]/div[1]/div[1]/span"));
+
+    // метод клика по кнопке Булки
+    public void clickBunsButton() {
+        bunsButton.click();
+    }
+
+    // метод ожидания открытия раздела Начинки
+    public void waitBunsPageOpen() {
+        $(byText("Булки")).shouldBe(Condition.visible, Duration.ofSeconds(3));
+    }
 }

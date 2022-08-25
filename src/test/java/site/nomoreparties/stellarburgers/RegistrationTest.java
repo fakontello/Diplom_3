@@ -9,23 +9,22 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class RegistrationTest {
 
-    private MainPage openMainPage;
     private RegistrationPage newRegistration;
     private LoginPage loginPage;
 
     @Before
     public void preconditions() {
-        openMainPage = open("https://stellarburgers.nomoreparties.site/", MainPage.class);
+        MainPage openMainPage = open("https://stellarburgers.nomoreparties.site/", MainPage.class);
         openMainPage.waitForLoadHomePage();
         newRegistration = new RegistrationPage();
         loginPage = new LoginPage();
+        openMainPage.clickPrivetOfficeButton();
+        loginPage.waitForLoadLoginPage();
     }
 
     // Тест на успешную регистрацию нового пользователя
     @Test
     public void newPositiveRegistration() {
-        openMainPage.clickPrivetOfficeButton();
-        loginPage.waitForLoadLoginPage();
         loginPage.clickRegistrationButtonOnLoginPage();
         newRegistration.RegisterOrderPageFiller(RandomStringUtils.randomAlphabetic(6),
                 RandomStringUtils.randomAlphabetic(6) + "@yandex.ru",
@@ -37,8 +36,6 @@ public class RegistrationTest {
     // Тест на не успешную регистрацию нового пользователя, пароль меньше 6 символов
     @Test
     public void newNegativeRegistration() {
-        openMainPage.clickPrivetOfficeButton();
-        loginPage.waitForLoadLoginPage();
         loginPage.clickRegistrationButtonOnLoginPage();
         newRegistration.RegisterOrderPageFiller(RandomStringUtils.randomAlphabetic(6),
                 RandomStringUtils.randomAlphabetic(6) + "@yandex.ru",
