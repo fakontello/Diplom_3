@@ -10,6 +10,7 @@ public class PrivateOfficeTest {
 
     private MainPage openMainPage;
     private PrivateOfficePage privateOfficePage;
+    private LoginPage loginPage;
     String password = RandomStringUtils.randomAlphabetic(6);
     String email = RandomStringUtils.randomAlphabetic(6) + "@yandex.ru";
 
@@ -19,7 +20,7 @@ public class PrivateOfficeTest {
         openMainPage = open("https://stellarburgers.nomoreparties.site/", MainPage.class);
         openMainPage.waitForLoadHomePage();
         RegistrationPage newRegistration = new RegistrationPage();
-        LoginPage loginPage = new LoginPage();
+        loginPage = new LoginPage();
         privateOfficePage = new PrivateOfficePage();
 
         // регистрация нового пользователя
@@ -37,14 +38,32 @@ public class PrivateOfficeTest {
         loginPage.loginPageFiller(email, password);
         loginPage.waitForLoadLoginPage();
         loginPage.clickLoginEnterButton();
-
+        loginPage.clickLoginEnterButton();
         openMainPage.waitForLoadMainPageAfterLogin();
     }
 
+    // переход в личный кабинет
     @Test
     public void enterPersonalOffice() {
-        // переход в личный кабинет
         openMainPage.clickPrivetOfficeButton();
         privateOfficePage.waitPrivateOfficePageLoad();
+    }
+
+    // переход из личного кабинета в конструктор
+    @Test
+    public void enterConstructor() {
+        openMainPage.clickPrivetOfficeButton();
+        privateOfficePage.waitPrivateOfficePageLoad();
+        privateOfficePage.clickConstructorButton();
+        openMainPage.waitForLoadMainPageAfterLogin();
+    }
+
+    // выход из личного кабинета
+    @Test
+    public void exitPrivateOffice() {
+        openMainPage.clickPrivetOfficeButton();
+        privateOfficePage.waitPrivateOfficePageLoad();
+        privateOfficePage.clickExitButton();
+        loginPage.waitForLoadLoginPage();
     }
 }

@@ -9,6 +9,11 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class LoginPage {
 
+    // метод ожидания загрузки страницы
+    public void waitForLoadLoginPage() {
+        $(byText("Вы — новый пользователь?")).shouldBe(Condition.visible, Duration.ofSeconds(3));
+    }
+
     // кнопка "Зарегистрироваться" на странице логина
     private final SelenideElement registrationButtonOnLoginPage =
             $(byXpath("//*[@id=\"root\"]/div/main/div/div/p[1]/a"));
@@ -16,11 +21,6 @@ public class LoginPage {
     // метод клика по кнопке "Зарегистрироваться" на странице логина
     public void clickRegistrationButtonOnLoginPage() {
         registrationButtonOnLoginPage.click();
-    }
-
-    // метод ожидания загрузки страницы: проверили видимость кнопки "Войти"
-    public void waitForLoadLoginPage() {
-        $(byText("Вы — новый пользователь?")).shouldBe(Condition.visible, Duration.ofSeconds(3));
     }
 
     // поле "Email"
@@ -41,6 +41,12 @@ public class LoginPage {
         loginPasswordField.setValue(password);
     }
 
+    // метод заполнения страницы вход пользователя
+    public void loginPageFiller(String email, String password) {
+        setLoginEmailField(email);
+        setLoginPasswordField(password);
+    }
+
     // кнопка "Войти" на странице логина
     private final SelenideElement loginEnterButton = $(byXpath("//*[@id=\"root\"]/div/main/div/form/button"));
 
@@ -57,10 +63,5 @@ public class LoginPage {
         resetPasswordButton.click();
     }
 
-    // метод заполнения страницы вход пользователя
-    public void loginPageFiller(String email, String password) {
-        setLoginEmailField(email);
-        setLoginPasswordField(password);
-    }
 
 }

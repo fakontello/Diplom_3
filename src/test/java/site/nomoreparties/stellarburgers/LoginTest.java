@@ -48,7 +48,7 @@ public class LoginTest {
     // тест входа по кнопке «Войти в аккаунт» на главной странице
     @Test
     public void loginFromMainPage() {
-        openMainPage.clickHomePageButton();
+        openMainPage.clickHomePageButton(); // вход по кнопке Stellar Burgers
         openMainPage.waitForLoadHomePage();
         openMainPage.clickLoginAccountButton();
     }
@@ -56,7 +56,7 @@ public class LoginTest {
     // тест входа по кнопке "Личный кабинет"
     @Test
     public void loginFromPrivetOfficeButton() {
-        openMainPage.clickHomePageButton();
+        openMainPage.clickHomePageButton(); // вход по кнопке Stellar Burgers
         openMainPage.waitForLoadHomePage();
         openMainPage.clickPrivetOfficeButton();
     }
