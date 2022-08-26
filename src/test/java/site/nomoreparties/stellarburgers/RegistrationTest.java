@@ -35,7 +35,7 @@ public class RegistrationTest {
     @Test
     public void newPositiveRegistration() {
         loginPage.clickRegistrationButtonOnLoginPage();
-        newRegistration.RegisterOrderPageFiller(RandomStringUtils.randomAlphabetic(6),
+        newRegistration.registerOrderPageFiller(RandomStringUtils.randomAlphabetic(6),
                 RandomStringUtils.randomAlphabetic(6) + "@yandex.ru",
                 RandomStringUtils.randomAlphabetic(6));
         newRegistration.clickRegistrationButton();
@@ -46,7 +46,7 @@ public class RegistrationTest {
     @Test
     public void newNegativeRegistration() {
         loginPage.clickRegistrationButtonOnLoginPage();
-        newRegistration.RegisterOrderPageFiller(RandomStringUtils.randomAlphabetic(6),
+        newRegistration.registerOrderPageFiller(RandomStringUtils.randomAlphabetic(6),
                 RandomStringUtils.randomAlphabetic(6) + "@yandex.ru",
                 RandomStringUtils.randomAlphabetic(5));
         newRegistration.clickRegistrationButton();

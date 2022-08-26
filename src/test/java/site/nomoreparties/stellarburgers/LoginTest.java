@@ -31,7 +31,7 @@ public class LoginTest {
         openMainPage.clickPrivetOfficeButton();
         loginPage.waitForLoadLoginPage();
         loginPage.clickRegistrationButtonOnLoginPage();
-        newRegistration.RegisterOrderPageFiller(RandomStringUtils.randomAlphabetic(6),
+        newRegistration.registerOrderPageFiller(RandomStringUtils.randomAlphabetic(6),
                 email,
                 password);
         newRegistration.waitForRegistrationButton();
