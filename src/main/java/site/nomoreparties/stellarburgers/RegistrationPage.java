@@ -59,7 +59,7 @@ public class RegistrationPage {
     }
 
     // метод заполнения страницы регистрации нового пользователя
-    public void RegisterOrderPageFiller(String name, String email, String password) {
+    public void registerOrderPageFiller(String name, String email, String password) {
         setNameField(name);
         setEmailField(email);
         setPasswordField(password);
