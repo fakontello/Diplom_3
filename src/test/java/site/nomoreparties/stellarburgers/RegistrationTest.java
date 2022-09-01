@@ -17,7 +17,7 @@ public class RegistrationTest {
 
     @Before
     public void preconditions() {
-        Configuration.browser = System.getProperty("browser"); // для запуска в разных браузерах
+        // Configuration.browser = System.getProperty("browser"); - для запуска в разных браузерах
         MainPage openMainPage = open("https://stellarburgers.nomoreparties.site/", MainPage.class);
         openMainPage.waitForLoadHomePage();
         newRegistration = new RegistrationPage();

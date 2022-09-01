@@ -11,25 +11,31 @@ public class LoginPage {
 
     // кнопка "Зарегистрироваться" на странице логина
     private final SelenideElement registrationButtonOnLoginPage =
-            $(byXpath("//*[@id=\"root\"]/div/main/div/div/p[1]/a"));
+            $(byClassName("Auth_link__1fOlj"));
+
+    // поле "Email"
+    private final SelenideElement loginEmailField =
+            $(byXpath("//label[text()='Email']/parent::div//input"));
+
+    // поле "Пароль"
+    private final SelenideElement loginPasswordField =
+            $(byXpath("//label[text()='Пароль']/parent::div//input"));
+
+    // кнопка "Войти" на странице логина
+    private final SelenideElement loginEnterButton = $(byXpath("//button[text()='Войти']"));
+
+    // кнопка Восстановить пароль на странице логина
+    private final SelenideElement resetPasswordButton = $(byXpath("//a[text()='Восстановить пароль']"));
 
     // метод клика по кнопке "Зарегистрироваться" на странице логина
     public void clickRegistrationButtonOnLoginPage() {
         registrationButtonOnLoginPage.click();
     }
 
-    // поле "Email"
-    private final SelenideElement loginEmailField =
-            $(byXpath("//*[@id=\"root\"]/div/main/div/form/fieldset[1]/div/div/input"));
-
     // метод заполнения поля "Email"
     public void setLoginEmailField(String email) {
         loginEmailField.setValue(email);
     }
-
-    // поле "Пароль"
-    private final SelenideElement loginPasswordField =
-            $(byXpath("//*[@id=\"root\"]/div/main/div/form/fieldset[2]/div/div/input"));
 
     // метод заполнения поля "Пароль"
     public void setLoginPasswordField(String password) {
@@ -42,9 +48,6 @@ public class LoginPage {
         setLoginPasswordField(password);
     }
 
-    // кнопка "Войти" на странице логина
-    private final SelenideElement loginEnterButton = $(byXpath("//*[@id=\"root\"]/div/main/div/form/button"));
-
     // метод ожидания загрузки страницы
     public void waitForLoadLoginPage() {
         loginEnterButton.shouldBe(Condition.visible);
@@ -54,9 +57,6 @@ public class LoginPage {
     public void clickLoginEnterButton() {
         loginEnterButton.click();
     }
-
-    // кнопка Восстановить пароль на странице логина
-    private final SelenideElement resetPasswordButton = $(byXpath("//*[@id=\"root\"]/div/main/div/div/p[2]/a"));
 
     // метод клика по кнопке Восстановить пароль
     public void clickResetPasswordButton() {

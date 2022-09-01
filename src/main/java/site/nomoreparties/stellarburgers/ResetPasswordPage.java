@@ -10,13 +10,13 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class ResetPasswordPage {
 
+    // кнопка "Войти" на странице сброса пароля
+    private final SelenideElement resetPassLoginButton = $(byXpath("//*[@id=\"root\"]/div/main/div/div/p/a"));
+
     // метод ожидания страницы сброса пароля
     public void waitResetPasswordPage() {
         $(byXpath("//*[@id=\"root\"]/div/main/div/form/button")).shouldBe(Condition.visible, Duration.ofSeconds(3));
     }
-
-    // кнопка "Войти" на странице сброса пароля
-    private final SelenideElement resetPassLoginButton = $(byXpath("//*[@id=\"root\"]/div/main/div/div/p/a"));
 
     // метод клика по кнопке "Войти" на странице сброса пароля
     public void clickResetPassLoginButton() {

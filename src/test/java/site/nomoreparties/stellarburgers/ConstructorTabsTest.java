@@ -17,7 +17,7 @@ public class ConstructorTabsTest {
 
     @Before
     public void preconditions() {
-        Configuration.browser = System.getProperty("browser"); // для запуска в разных браузерах
+        // Configuration.browser = System.getProperty("browser"); - для запуска в разных браузерах
         openMainPage = open("https://stellarburgers.nomoreparties.site/", MainPage.class);
         openMainPage.waitForLoadHomePage();
         RegistrationPage newRegistration = new RegistrationPage();

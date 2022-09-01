@@ -14,33 +14,43 @@ public class RegistrationPage {
     private final SelenideElement nameField =
             $(byXpath("//*[@id=\"root\"]/div/main/div/form/fieldset[1]/div/div/input"));
 
+    // поле "Email"
+    private final SelenideElement emailField =
+            $(byXpath("/html/body/div/div/main/div/form/fieldset[2]/div/div/input"));
+
+    // поле "Пароль"
+    private final SelenideElement passwordField =
+            $(byXpath("//*[@id=\"root\"]/div/main/div/form/fieldset[3]/div/div/input"));
+
+    // кнопка "Войти" на странице регистрации
+    private final SelenideElement registrationLoginButton = $(byXpath("//*[@id=\"root\"]/div/main/div/div/p/a"));
+
+    // кнопка "Зарегистрироваться"
+    private final SelenideElement registrationButton =
+            $(byCssSelector("button[class='button_button__33qZ0 "
+                    + "button_button_type_primary__1O7Bx button_button_size_medium__3zxIa']"));
+
+    // поле Некорректный пароль
+    private final SelenideElement unsuccessfulRegistration = $(byText("Некорректный пароль"));
+
+    public SelenideElement getUnsuccessfulRegistration() {
+        return unsuccessfulRegistration;
+    }
+
     // метод заполнения поля "Имя"
     public void setNameField(String name) {
         nameField.setValue(name);
     }
-
-    // поле "Email"
-    private final SelenideElement emailField =
-            $(byXpath("/html/body/div/div/main/div/form/fieldset[2]/div/div/input"));
 
     // метод заполнения поля "Email"
     public void setEmailField(String email) {
         emailField.setValue(email);
     }
 
-    // поле "Пароль"
-    private final SelenideElement passwordField =
-            $(byXpath("//*[@id=\"root\"]/div/main/div/form/fieldset[3]/div/div/input"));
-
     // метод заполнения поля "Пароль"
     public void setPasswordField(String password) {
         passwordField.setValue(password);
     }
-
-    // кнопка "Зарегистрироваться"
-    private final SelenideElement registrationButton =
-            $(byCssSelector("button[class='button_button__33qZ0 "
-                    + "button_button_type_primary__1O7Bx button_button_size_medium__3zxIa']"));
 
     // метод клика по кнопке "Зарегистрироваться"
     public void clickRegistrationButton() {
@@ -52,12 +62,6 @@ public class RegistrationPage {
         registrationButton.shouldBe(Condition.visible, Duration.ofSeconds(3));
     }
 
-    private final SelenideElement unsuccessfulRegistration = $(byText("Некорректный пароль"));
-
-    public SelenideElement getUnsuccessfulRegistration() {
-        return unsuccessfulRegistration;
-    }
-
     // метод заполнения страницы регистрации нового пользователя
     public void registerOrderPageFiller(String name, String email, String password) {
         setNameField(name);
@@ -65,15 +69,12 @@ public class RegistrationPage {
         setPasswordField(password);
     }
 
-    // кнопка "Войти" на странице регистрации
-    private final SelenideElement registrationLoginButton = $(byXpath("//*[@id=\"root\"]/div/main/div/div/p/a"));
-
     // метод клика по кнопке "Войти" на странице регистрации
     public void clickRegistrationLoginButton() {
         registrationLoginButton.click();
     }
 
-    // етод ожидания кнопки Войти на странице регистрации
+    // метод ожидания кнопки Войти на странице регистрации
     public void waitRegistrationLoginButton() {
         registrationButton.shouldBe(Condition.visible, Duration.ofSeconds(3));
     }
