@@ -146,6 +146,15 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <!-- https://mvnrepository.com/artifact/junit/junit -->
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <!--Тег scope указывает на область видимости зависимости: она видна только тестовым
+            классам в директории src/test/java-->
+            <scope>main</scope>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>

@@ -2,13 +2,14 @@ package site.nomoreparties.stellarburgers;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import org.junit.Assert;
+import org.junit.matchers.JUnitMatchers;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
-import static java.time.Duration.ofSeconds;
+
 
 public class MainPage {
 
@@ -21,18 +22,19 @@ public class MainPage {
     // кнопка "Оформить заказ" после входа в личный кабинет
     private final SelenideElement makeOrderButton = $(byXpath("//button[text()='Оформить заказ']"));
 
-    // кнопка галвное страницы
-    private final SelenideElement homePageButton = $(byXpath("//*[@id=\"root\"]/div/header/nav/div/a"));
+    // кнопка главной страницы
+    private final SelenideElement homePageButton = $(byClassName("AppHeader_header__logo__2D0X2"));
 
     // кнопка Консутрктора: Соусы
-    private final SelenideElement sauceButton = $(byXpath("//*[@id=\"root\"]/div/main/section[1]/div[1]/div[2]/span"));
+    private final SelenideElement sauceButton = $(byXpath("//span[text()='Соусы']/.."));
 
     // кнопка Конструктора: Начинки
-    private final SelenideElement fillersButton =
-            $(byXpath("//*[@id=\"root\"]/div/main/section[1]/div[1]/div[3]/span"));
+    private final SelenideElement fillersButton = $(byXpath("//span[text()='Начинки']/.."));
 
     // кнопка Конструктора: Булки
-    private final SelenideElement bunsButton = $(byXpath("//*[@id=\"root\"]/div/main/section[1]/div[1]/div[1]/span"));
+    private final SelenideElement bunsButton = $(byXpath("//span[text()='Булки']/.."));
+
+    // $(By.xpath("//*[@id='list']//li[@class='enabled' and .//text()='foo']//*[@class='remove']"))
 
     // метод клика по кнопке "Личный кабинет"
     public void clickPrivetOfficeButton() {
@@ -41,7 +43,7 @@ public class MainPage {
 
     // метод ожидания загрузки страницы: проверили видимость кнопки "Личный кабинет"
     public void waitForLoadHomePage() {
-        $(byText("Соберите бургер")).shouldBe(Condition.visible, Duration.ofSeconds(3));
+        homePageButton.shouldBe(Condition.visible, Duration.ofSeconds(3));
     }
 
     // метод клика по кнопке "Войти в аккаунт"
@@ -66,7 +68,9 @@ public class MainPage {
 
     // метод ожидания открытия раздела Соусы
     public void waitSaucePageOpen() {
-        $(byText("Соусы")).shouldBe(Condition.visible, Duration.ofSeconds(3));
+        String expectedClassName = sauceButton.getAttribute("class");
+        assert expectedClassName != null;
+        Assert.assertTrue(expectedClassName.contains("tab_tab_type_current__2BEPc"));
     }
 
     // метод клика по кнопке Начинки
@@ -76,7 +80,9 @@ public class MainPage {
 
     // метод ожидания открытия раздела Начинки
     public void waitFillersPageOpen() {
-        $(byText("Начинки")).shouldBe(Condition.visible, Duration.ofSeconds(3));
+        String expectedClassName = fillersButton.getAttribute("class");
+        assert expectedClassName != null;
+        Assert.assertTrue(expectedClassName.contains("tab_tab_type_current__2BEPc"));
     }
 
     // метод клика по кнопке Булки
@@ -84,8 +90,10 @@ public class MainPage {
         bunsButton.click();
     }
 
-    // метод ожидания открытия раздела Начинки
+    // метод ожидания открытия раздела Булки
     public void waitBunsPageOpen() {
-        $(byText("Булки")).shouldBe(Condition.visible, Duration.ofSeconds(3));
+        String expectedClassName = bunsButton.getAttribute("class");
+        assert expectedClassName != null;
+        Assert.assertTrue(expectedClassName.contains("tab_tab_type_current__2BEPc"));
     }
 }

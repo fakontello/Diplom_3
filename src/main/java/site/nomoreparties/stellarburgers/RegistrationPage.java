@@ -12,23 +12,21 @@ public class RegistrationPage {
 
     // поле "Имя"
     private final SelenideElement nameField =
-            $(byXpath("//*[@id=\"root\"]/div/main/div/form/fieldset[1]/div/div/input"));
+            $(byXpath("//label[text()='Имя']/parent::div//input"));
 
     // поле "Email"
     private final SelenideElement emailField =
-            $(byXpath("/html/body/div/div/main/div/form/fieldset[2]/div/div/input"));
+            $(byXpath("//label[text()='Email']/parent::div//input"));
 
     // поле "Пароль"
     private final SelenideElement passwordField =
-            $(byXpath("//*[@id=\"root\"]/div/main/div/form/fieldset[3]/div/div/input"));
+            $(byXpath("//label[text()='Пароль']/parent::div//input"));
 
     // кнопка "Войти" на странице регистрации
-    private final SelenideElement registrationLoginButton = $(byXpath("//*[@id=\"root\"]/div/main/div/div/p/a"));
+    private final SelenideElement registrationLoginButton = $(byXpath("//a[text()='Войти']"));
 
     // кнопка "Зарегистрироваться"
-    private final SelenideElement registrationButton =
-            $(byCssSelector("button[class='button_button__33qZ0 "
-                    + "button_button_type_primary__1O7Bx button_button_size_medium__3zxIa']"));
+    private final SelenideElement registrationButton = $(byXpath("//button[text()='Зарегистрироваться']"));
 
     // поле Некорректный пароль
     private final SelenideElement unsuccessfulRegistration = $(byText("Некорректный пароль"));

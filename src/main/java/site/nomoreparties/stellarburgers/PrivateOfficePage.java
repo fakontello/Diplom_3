@@ -10,14 +10,14 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class PrivateOfficePage {
     // кнопка Конструктор
-    private final SelenideElement constructorButton = $(byXpath("//*[@id=\"root\"]/div/header/nav/ul/li[1]/a/p"));
+    private final SelenideElement constructorButton = $(byXpath("//p[text()='Конструктор']"));
 
     // кнопка Выйти
-    private final SelenideElement exitButton = $(byXpath("//*[@id=\"root\"]/div/main/div/nav/ul/li[3]/button"));
+    private final SelenideElement exitButton = $(byXpath("//button[text()='Выйти']"));
 
     // метод ожидания загрузки страницы Личного кабинета
     public void waitPrivateOfficePageLoad() {
-        $(byXpath("//*[@id=\"root\"]/div/main/div/nav/ul/li[1]/a")).shouldBe(Condition.visible, Duration.ofSeconds(3));
+        $(byXpath("//a[text()='Профиль']")).shouldBe(Condition.visible, Duration.ofSeconds(3));
     }
 
     // метод клика по кнопке Конструктор
