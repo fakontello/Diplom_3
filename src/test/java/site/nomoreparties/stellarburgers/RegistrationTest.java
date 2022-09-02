@@ -11,21 +11,24 @@ import static com.codeborne.selenide.Selenide.open;
 import static org.apache.http.HttpStatus.SC_ACCEPTED;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.Assert.assertEquals;
+import static site.nomoreparties.stellarburgers.Urls.mainPageUrl;
 
 public class RegistrationTest {
 
     private RegistrationPage newRegistration;
     private LoginPage loginPage;
     private BurgersApiUserClient client;
+    private User newUser;
 
     @Before
     public void preconditions() {
         // Configuration.browser = System.getProperty("browser"); - для запуска в разных браузерах
-        MainPage openMainPage = open("https://stellarburgers.nomoreparties.site/", MainPage.class);
+        MainPage openMainPage = open(mainPageUrl, MainPage.class);
         openMainPage.waitForLoadHomePage();
-        newRegistration = new RegistrationPage(RandomStringUtils.randomAlphabetic(6),
+        newUser = new User(RandomStringUtils.randomAlphabetic(6),
                 RandomStringUtils.randomAlphabetic(6) + "@yandex.ru",
                 RandomStringUtils.randomAlphabetic(6));
+        newRegistration = new RegistrationPage();
         loginPage = new LoginPage();
         client = new BurgersApiUserClient();
         openMainPage.clickPrivetOfficeButton();
@@ -34,8 +37,8 @@ public class RegistrationTest {
 
     @After
     public void postConditions() {
-        RegistrationPage existingUser = new RegistrationPage
-                (newRegistration.getEmail(), newRegistration.getPassword(), newRegistration.getName());
+        User existingUser = new User
+                (newUser.getName(), newUser.getEmail(), newUser.getPassword());
         Response responseLogin = client.loginUser(existingUser);
         String accessToken = responseLogin.body().jsonPath().getString("accessToken");
         assertEquals(SC_OK, responseLogin.statusCode());
@@ -51,7 +54,7 @@ public class RegistrationTest {
     public void newPositiveRegistration() {
         loginPage.clickRegistrationButtonOnLoginPage();
         newRegistration.registerOrderPageFiller
-                (newRegistration.getName(), newRegistration.getEmail(), newRegistration.getPassword());
+                (newUser.getName(), newUser.getEmail(), newUser.getPassword());
         newRegistration.clickRegistrationButton();
         loginPage.waitForLoadLoginPage();
     }

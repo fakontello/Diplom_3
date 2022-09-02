@@ -23,7 +23,7 @@ public class BurgersApiUserClient {
                     .accept(ContentType.JSON)
                     .contentType(ContentType.JSON);
 
-    public Response createUser(RegistrationPage newUser) {
+    public Response createUser(User newUser) {
         return RestAssured.with()
                 .spec(requestSpecification)
                 .body(newUser)
@@ -31,7 +31,7 @@ public class BurgersApiUserClient {
                 .post("/auth/register");
     }
 
-    public Response loginUser(RegistrationPage existingUser) {
+    public Response loginUser(User existingUser) {
         return RestAssured.with()
                 .spec(requestSpecification)
                 .body(existingUser)
@@ -47,7 +47,7 @@ public class BurgersApiUserClient {
                 .delete("/auth/user");
     }
 
-    public Response updateUserInfo(String accessToken, RegistrationPage existingUser) {
+    public Response updateUserInfo(String accessToken, User existingUser) {
         return RestAssured.with()
                 .spec(requestSpecification)
                 .headers("Authorization", accessToken)

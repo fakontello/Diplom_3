@@ -1,48 +1,60 @@
 package site.nomoreparties.stellarburgers;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.hamcrest.MatcherAssert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static com.codeborne.selenide.Selenide.open;
+import static org.apache.http.HttpStatus.SC_ACCEPTED;
+import static org.apache.http.HttpStatus.SC_OK;
+import static org.junit.Assert.assertEquals;
+import static site.nomoreparties.stellarburgers.Urls.mainPageUrl;
+import static site.nomoreparties.stellarburgers.User.getRandomUser;
 
 public class ConstructorTabsTest {
-    private MainPage openMainPage;
-    String password = RandomStringUtils.randomAlphabetic(6);
-    String email = RandomStringUtils.randomAlphabetic(6) + "@yandex.ru";
 
+    private MainPage openMainPage;
+    private BurgersApiUserClient client;
+    private User newUser;
 
     @Before
     public void preconditions() {
         // Configuration.browser = System.getProperty("browser"); - для запуска в разных браузерах
-        openMainPage = open("https://stellarburgers.nomoreparties.site/", MainPage.class);
-        openMainPage.waitForLoadHomePage();
-        // RegistrationPage newRegistration = new RegistrationPage();
-        LoginPage loginPage = new LoginPage();
+        client = new BurgersApiUserClient();
+        newUser = getRandomUser();
 
         // регистрация нового пользователя
-        openMainPage.clickPrivetOfficeButton();
-        loginPage.waitForLoadLoginPage();
-        loginPage.clickRegistrationButtonOnLoginPage();
-//        newRegistration.registerOrderPageFiller(RandomStringUtils.randomAlphabetic(6),
-//                email,
-//                password);
-//        newRegistration.waitForRegistrationButton();
-//        newRegistration.clickRegistrationButton();
-        loginPage.waitForLoadLoginPage();
+        Response responseCreate = client.createUser(newUser);
+        assertEquals(SC_OK, responseCreate.statusCode());
+        String responseSuccess = responseCreate.body().jsonPath().getString("success");
+        MatcherAssert.assertThat(responseSuccess, true);
 
         // логин
-        loginPage.loginPageFiller(email, password);
-        loginPage.waitForLoadLoginPage();
-        loginPage.clickLoginEnterButton();
-        openMainPage.waitForLoadMainPageAfterLogin();
+        User existingUser = new User(newUser.getName(), newUser.getEmail(), newUser.getPassword());
+        Response responseLogin = client.loginUser(existingUser);
+        assertEquals(SC_OK, responseLogin.statusCode());
+        String responseLoginSuccess = responseLogin.body().jsonPath().getString("success");
+        MatcherAssert.assertThat(responseLoginSuccess, true);
+
+        // открытие главной страницы после создания и логина пользователя
+        openMainPage = open(mainPageUrl, MainPage.class);
+        openMainPage.waitForLoadHomePage();
     }
 
     @After
     public void postConditions() {
+        User existingUser = new User(newUser.getName(), newUser.getEmail(), newUser.getPassword());
+        Response responseLogin = client.loginUser(existingUser);
+        String accessToken = responseLogin.body().jsonPath().getString("accessToken");
+        assertEquals(SC_OK, responseLogin.statusCode());
+        Response responseDeleteUser = client.deleteUser(accessToken);
+        assertEquals(SC_ACCEPTED, responseDeleteUser.statusCode());
+        String responseMessage = responseDeleteUser.body().jsonPath().getString("message");
+        assertEquals(responseMessage, "User successfully removed");
         Selenide.closeWebDriver();
     }
 
