@@ -20,18 +20,18 @@ public class ConstructorTabsTest {
         // Configuration.browser = System.getProperty("browser"); - для запуска в разных браузерах
         openMainPage = open("https://stellarburgers.nomoreparties.site/", MainPage.class);
         openMainPage.waitForLoadHomePage();
-        RegistrationPage newRegistration = new RegistrationPage();
+        // RegistrationPage newRegistration = new RegistrationPage();
         LoginPage loginPage = new LoginPage();
 
         // регистрация нового пользователя
         openMainPage.clickPrivetOfficeButton();
         loginPage.waitForLoadLoginPage();
         loginPage.clickRegistrationButtonOnLoginPage();
-        newRegistration.registerOrderPageFiller(RandomStringUtils.randomAlphabetic(6),
-                email,
-                password);
-        newRegistration.waitForRegistrationButton();
-        newRegistration.clickRegistrationButton();
+//        newRegistration.registerOrderPageFiller(RandomStringUtils.randomAlphabetic(6),
+//                email,
+//                password);
+//        newRegistration.waitForRegistrationButton();
+//        newRegistration.clickRegistrationButton();
         loginPage.waitForLoadLoginPage();
 
         // логин

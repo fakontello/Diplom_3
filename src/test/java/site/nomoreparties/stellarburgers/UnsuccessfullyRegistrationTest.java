@@ -1,22 +1,18 @@
 package site.nomoreparties.stellarburgers;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
-import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static com.codeborne.selenide.Selenide.open;
-import static org.apache.http.HttpStatus.SC_ACCEPTED;
-import static org.apache.http.HttpStatus.SC_OK;
-import static org.junit.Assert.assertEquals;
 
-public class RegistrationTest {
+public class UnsuccessfullyRegistrationTest {
 
     private RegistrationPage newRegistration;
     private LoginPage loginPage;
-    private BurgersApiUserClient client;
 
     @Before
     public void preconditions() {
@@ -25,35 +21,24 @@ public class RegistrationTest {
         openMainPage.waitForLoadHomePage();
         newRegistration = new RegistrationPage(RandomStringUtils.randomAlphabetic(6),
                 RandomStringUtils.randomAlphabetic(6) + "@yandex.ru",
-                RandomStringUtils.randomAlphabetic(6));
+                RandomStringUtils.randomAlphabetic(5));
         loginPage = new LoginPage();
-        client = new BurgersApiUserClient();
         openMainPage.clickPrivetOfficeButton();
         loginPage.waitForLoadLoginPage();
     }
 
     @After
     public void postConditions() {
-        RegistrationPage existingUser = new RegistrationPage
-                (newRegistration.getEmail(), newRegistration.getPassword(), newRegistration.getName());
-        Response responseLogin = client.loginUser(existingUser);
-        String accessToken = responseLogin.body().jsonPath().getString("accessToken");
-        assertEquals(SC_OK, responseLogin.statusCode());
-        Response responseDeleteUser = client.deleteUser(accessToken);
-        assertEquals(SC_ACCEPTED, responseDeleteUser.statusCode());
-        String responseMessage = responseDeleteUser.body().jsonPath().getString("message");
-        assertEquals(responseMessage, "User successfully removed");
         Selenide.closeWebDriver();
     }
 
-    // Тест на успешную регистрацию нового пользователя
+    // Тест на не успешную регистрацию нового пользователя, пароль меньше 6 символов
     @Test
-    public void newPositiveRegistration() {
+    public void newNegativeRegistration() {
         loginPage.clickRegistrationButtonOnLoginPage();
         newRegistration.registerOrderPageFiller
                 (newRegistration.getName(), newRegistration.getEmail(), newRegistration.getPassword());
         newRegistration.clickRegistrationButton();
-        loginPage.waitForLoadLoginPage();
+        newRegistration.getUnsuccessfulRegistration().shouldHave(Condition.exactText("Некорректный пароль"));
     }
-
 }

@@ -24,7 +24,7 @@ public class LoginTest {
         // Configuration.browser = System.getProperty("browser"); - для запуска в разных браузерах
         openMainPage = open("https://stellarburgers.nomoreparties.site/", MainPage.class);
         openMainPage.waitForLoadHomePage();
-        newRegistration = new RegistrationPage();
+//        newRegistration = new RegistrationPage();
         loginPage = new LoginPage();
         resetPasswordPage = new ResetPasswordPage();
         // регистрация нового пользователя

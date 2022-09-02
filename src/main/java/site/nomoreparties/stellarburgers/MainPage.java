@@ -3,8 +3,6 @@ package site.nomoreparties.stellarburgers;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.junit.Assert;
-import org.junit.matchers.JUnitMatchers;
-
 import java.time.Duration;
 
 import static com.codeborne.selenide.Selectors.*;

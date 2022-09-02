@@ -2,7 +2,6 @@ package site.nomoreparties.stellarburgers;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import java.time.Duration;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -22,10 +21,12 @@ public class LoginPage {
             $(byXpath("//label[text()='Пароль']/parent::div//input"));
 
     // кнопка "Войти" на странице логина
-    private final SelenideElement loginEnterButton = $(byXpath("//button[text()='Войти']"));
+    private final SelenideElement loginEnterButton =
+            $(byXpath("//button[text()='Войти']"));
 
     // кнопка Восстановить пароль на странице логина
-    private final SelenideElement resetPasswordButton = $(byXpath("//a[text()='Восстановить пароль']"));
+    private final SelenideElement resetPasswordButton =
+            $(byXpath("//a[text()='Восстановить пароль']"));
 
     // метод клика по кнопке "Зарегистрироваться" на странице логина
     public void clickRegistrationButtonOnLoginPage() {
@@ -62,6 +63,5 @@ public class LoginPage {
     public void clickResetPasswordButton() {
         resetPasswordButton.click();
     }
-
 
 }
