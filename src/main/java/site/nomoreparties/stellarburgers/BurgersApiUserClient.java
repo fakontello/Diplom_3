@@ -47,13 +47,4 @@ public class BurgersApiUserClient {
                 .delete("/auth/user");
     }
 
-    public Response updateUserInfo(String accessToken, User existingUser) {
-        return RestAssured.with()
-                .spec(requestSpecification)
-                .headers("Authorization", accessToken)
-                .body(existingUser)
-                .when()
-                .patch("/auth/user");
-    }
-
 }
