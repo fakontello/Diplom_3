@@ -2,7 +2,6 @@ package site.nomoreparties.stellarburgers;
 
 import com.codeborne.selenide.Selenide;
 import io.restassured.response.Response;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.After;
 import org.junit.Before;
